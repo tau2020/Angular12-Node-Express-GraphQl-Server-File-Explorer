@@ -2,8 +2,8 @@ version: "3.7"
 
 services:
   app:
-    image: node:lts-alpine
-    working_dir: /app
+    image: client
+    working_dir: /client
     volumes:
       - ./:/app
     ports:
@@ -12,22 +12,16 @@ services:
     command: >
       sh -c "npm install &&
              npx ng serve --host 0.0.0.0"
-
+            
   server:
-    image: node:lts-alpine
+    image: server:lts-alpine
     working_dir: /server
     volumes:
       - ./server:/server
     # port 3000 has to match src/proxy.conf.json
     ports:
-      - 3000:3000
-    depends_on:
-      - mongo
-    environment:
-      MONGO_HOST: mongo
+      - 4000:4000
     command: >
       sh -c "npm i -g nodemon && npm install && nodemon ./bin/www"
 
-  mongo:
-    image: mongo
 
