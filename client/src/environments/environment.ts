@@ -2,13 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-
-
 export const environment = {
   api: '127.0.0.1:4200/',
   enableDebug: false,
   production: false,
-  graphql: '127.0.0.1:4200/graphql'
+  graphql: '${ENV_BACKEND_URI}'
 };
 
 /*

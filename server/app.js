@@ -59,8 +59,13 @@ app.use('/graphql', graphqlHTTP({
   rootValue: root,
   graphiql: true,
 }));
-app.listen(4000);
-console.log('Running a GraphQL API server at http://127.0.0.1:4000/graphql');
+
+
+const port = process.env.PORT || 4000;
+
+app.listen(port, function () {
+  console.log(`Running a GraphQL API server on port http://localhost:${port}/graphql`);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
