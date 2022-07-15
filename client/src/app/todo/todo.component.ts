@@ -4,6 +4,7 @@ import { EnvService } from '../env.service';
 import { TodoService } from './todo.service';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import {GET_DIRECTORIES} from './graphql-query'
 
 
 interface FileNode {
@@ -17,65 +18,6 @@ interface FileNode {
   children?: FileNode[];
 }
 
-const GET_DIRECTORIES = `
-                                query ($name: String) {
-                                  getFolderDetails(name: $name) {
-                                    extension
-                                    birthtimeMs
-                                    mode
-                                    name
-                                    size
-                                    type
-                                    path
-                                    children {
-                                      type
-                                      extension
-                                      name
-                                      size
-                                      path
-                                      mode
-                                      birthtimeMs
-                                      path
-                                      children {
-                                        extension
-                                        birthtimeMs
-                                        mode
-                                        name
-                                        size
-                                        type
-                                        path
-                                        children {
-                                          extension
-                                          birthtimeMs
-                                          mode
-                                          name
-                                          size
-                                          type
-                                          path
-                                          children {
-                                            children {
-                                              extension
-                                              birthtimeMs
-                                              mode
-                                              name
-                                              size
-                                              type
-                                              path
-                                            }
-                                            extension
-                                            birthtimeMs
-                                            mode
-                                            name
-                                            size
-                                            type
-                                            path
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-`;
 
 const TREE_DATA: FileNode[] = [];
 
@@ -119,7 +61,7 @@ export class TodoComponent implements OnInit {
     };
 
     return this.http.post(this.env.graphQlApi, query).subscribe((response: any): void => {
-      this.dataSource.data = response.data.getFolderDetails;;
+      this.dataSource.data = response.data.getFolderDetails;
     });
   };
 
@@ -131,7 +73,7 @@ export class TodoComponent implements OnInit {
     try {
       this.getFolders();
     } catch (error) {
-      
+      // #TODO: add error handling
     }
    
   }
