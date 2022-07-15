@@ -1,5 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EnvServiceProvider } from './env.service.provider';
 import { TodoComponent } from './todo/todo.component';
+import { HttpErrorInterceptor } from './../app/todo/http-error.interceptor';
 
 const routes: Routes = [
   { path: ':status', component: TodoComponent },
@@ -38,7 +39,18 @@ const routes: Routes = [
     MatIconModule
    
   ],
-  providers: [EnvServiceProvider,
+  providers: [
+    {
+
+      provide: HTTP_INTERCEPTORS,
+ 
+      useClass: HttpErrorInterceptor,
+ 
+      multi: true
+ 
+    }
+, 
+    EnvServiceProvider,
     {provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [AppComponent]

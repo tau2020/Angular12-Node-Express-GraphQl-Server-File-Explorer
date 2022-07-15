@@ -6,8 +6,6 @@ services:
     working_dir: /client
     volumes:
      - ./client:/client
-     - ./client/node_modules:/client/node_modules
-
     ports:
       - 4200:4200
     # --host 0.0.0.0 to listen to all the interfaces from the container (dev env)
@@ -20,13 +18,8 @@ services:
     working_dir: /server
     volumes:
       - ./server:/server
-      - ./server/node_modules:/server/node_modules
-  
-    
-    # port 3000 has to match src/proxy.conf.json
     ports:
       - 5000:5000
-
     command: >
       sh -c "npm i -g nodemon && npm install && nodemon ./bin/www"
 

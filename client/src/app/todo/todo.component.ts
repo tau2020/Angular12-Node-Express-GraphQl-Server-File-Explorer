@@ -5,6 +5,7 @@ import { TodoService } from './todo.service';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 
+
 interface FileNode {
   extension: string;
   birthtimeMs: number;
@@ -127,6 +128,11 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getFolders();
+    try {
+      this.getFolders();
+    } catch (error) {
+      
+    }
+   
   }
 }
