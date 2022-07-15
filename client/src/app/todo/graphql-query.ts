@@ -1,3 +1,15 @@
+export const TREE_DATA: FileNode[] = [];
+export interface FileNode {
+  extension: string;
+  birthtimeMs: number;
+  mode: string;
+  name: string;
+  size: number;
+  type: string;
+  path: string;
+  children?: FileNode[];
+}
+
 export const GET_DIRECTORIES = `
                                 query ($name: String) {
                                   getFolderDetails(name: $name) {

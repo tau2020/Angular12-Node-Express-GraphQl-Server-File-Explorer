@@ -4,24 +4,7 @@ import { EnvService } from '../env.service';
 import { TodoService } from './todo.service';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import {GET_DIRECTORIES} from './graphql-query'
-
-
-interface FileNode {
-  extension: string;
-  birthtimeMs: number;
-  mode: string;
-  name: string;
-  size: number;
-  type: string;
-  path: string;
-  children?: FileNode[];
-}
-
-
-const TREE_DATA: FileNode[] = [];
-
-
+import {GET_DIRECTORIES, FileNode, TREE_DATA} from './graphql-query'
 
 @Component({
   selector: 'tree-nested-overview-example',
